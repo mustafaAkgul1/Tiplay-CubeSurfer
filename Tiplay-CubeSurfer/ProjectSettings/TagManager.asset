@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Killzone
   - Enemy
+  - NormalCube
+  - ObstacleCube
+  - NormalCubeBack
+  - NormalCubeFront
+  - PlayerParent
   layers:
   - Default
   - TransparentFX
@@ -23,9 +28,9 @@ TagManager:
   - Enemies
   - Walls
   - Obstacles
-  - 
-  - 
-  - 
+  - NormalCubes
+  - PlayerModel
+  - PlayerParent
   - 
   - 
   - 
