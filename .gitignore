@@ -2,16 +2,20 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Mm]emoryCaptures/
+# for MAC
+Tiplay-CubeSurfer/**/StreamingAssets/build_info.txt
+Tiplay-CubeSurfer/**/assetDatabase3
+Tiplay-CubeSurfer/**/.DS_Store
+Tiplay-CubeSurfer/Temp/
+Tiplay-CubeSurfer/**/CurrentLayout.dwlt
+Tiplay-CubeSurfer/Assets/StreamingAssets/build_info.txt
+Tiplay-CubeSurfer/Library/
+Tiplay-CubeSurfer/obj/
+Tiplay-CubeSurfer/Logs/
+
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
-!/[Aa]ssets/**/*.meta
+!/Assets/**/*.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
@@ -57,4 +61,3 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
-
