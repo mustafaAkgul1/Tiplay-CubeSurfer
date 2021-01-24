@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class NormalCubeFrontCheck : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
+        if (other.CompareTag("ObstacleCube"))
+        {
+            transform.parent.parent = null;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
+            GameManager._instance.DecreaseCamFOV();
+        }
+
+    } // OnTriggerEnter()
+
+
+} // class

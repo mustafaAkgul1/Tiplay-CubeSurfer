@@ -11,6 +11,8 @@ TagManager:
   - NormalCubeBack
   - NormalCubeFront
   - PlayerParent
+  - CubeDetectorColl
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -31,7 +33,7 @@ TagManager:
   - NormalCubes
   - PlayerModel
   - PlayerParent
-  - 
+  - PlayerCubeDetector
   - 
   - 
   - 

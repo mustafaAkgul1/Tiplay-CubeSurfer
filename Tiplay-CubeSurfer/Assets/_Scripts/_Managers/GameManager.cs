@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,25 +9,38 @@ public class GameManager : MonoBehaviour
     public static GameManager _instance;
 
     [Header("General Variables")]
+    public bool isGameStarted = false;
     public bool isGameFinished = false;
+    public float camFovChangeAmount;
+    public float camFovChangeTime;
+
+    [Header("References")]
+    public Camera mainCamera;
 
     private void Awake()
     {
         _instance = this;
     }
 
-    void Start()
-    {
-
-
-    } // Start()
-
     void Update()
     {
+        if (!isGameStarted && Input.GetMouseButtonDown(0))
+        {
+            isGameStarted = true;
+            TriggerGameStarted();
+        }
+
         HandleWinning();
 
     } // Update()
-  
+
+    void TriggerGameStarted()
+    {
+        //ui tutorial kapat
+        PlayerMovementController._instance.TriggerGameStarted();
+
+    } // TriggerGameStarted()
+
     void HandleWinning()
     {
         if (!isGameFinished && true) // win condition
@@ -47,7 +61,41 @@ public class GameManager : MonoBehaviour
 
     } // SetPlayerPrefSettings()
 
+    public void IncreaseCamFOV()
+    {
+        //if (DOTween.IsTweening("CamFOVIncreaseTween"))
+        //{
+        //    DOTween.Kill("CamFOVIncreaseTween");
+        //}
 
+        //if (DOTween.IsTweening("CamFOVDecreaseTween"))
+        //{
+        //    DOTween.Kill("CamFOVDecreaseTween", true);
+        //}
+
+        //mainCamera.DOFieldOfView(mainCamera.fieldOfView + camFovChangeAmount, camFovChangeTime).SetId("CamFOVIncreaseTween");
+
+        CameraController._instance.GetCollectedCubeCount();
+
+    } // IncreaseCamFOV()
+
+    public void DecreaseCamFOV()
+    {
+        //if (DOTween.IsTweening("CamFOVIncreaseTween"))
+        //{
+        //    DOTween.Kill("CamFOVIncreaseTween", true);
+        //}
+
+        //if (DOTween.IsTweening("CamFOVDecreaseTween"))
+        //{
+        //    DOTween.Kill("CamFOVDecreaseTween", true);
+        //}
+
+        //mainCamera.DOFieldOfView(mainCamera.fieldOfView - camFovChangeAmount, camFovChangeTime).SetId("CamFOVDecreaseTween");
+
+        CameraController._instance.GetCollectedCubeCount();
+
+    } // DecreaseCamFOV()
 
 
 

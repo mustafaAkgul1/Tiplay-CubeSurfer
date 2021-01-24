@@ -4,21 +4,68 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController _instance;
+
+    [Header("General Variables")]
+    public bool useFOVChange = true;
+    public float cubeCountFOVMultiplier;
+    public float fovSmoothDampValue;
+    Vector3 offsetToPlayer;
+    int currentCollectedCubeCount = 0;
+    float targetFOVamount = 60f;
+    float defFOVAmount = 60f;
+
     [Header("References")]
     public Transform playerTransform;
-    Vector3 offset;
+    public PlayerCubeDetectorController playerCubeScript;
+    Camera cam;
+
+    private void Awake()
+    {
+        _instance = this;
+
+    } // Awake()
 
     void Start()
     {
-        offset = transform.position - playerTransform.position;
+        cam = GetComponent<Camera>();
+        offsetToPlayer = transform.position - playerTransform.position;
+        defFOVAmount = cam.fieldOfView;
+
+        targetFOVamount = defFOVAmount;
+
+        //GetCollectedCubeCount();
 
     } // Start()
 
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y, playerTransform.position.z + offset.z);
+        if (useFOVChange)
+        {
+            CalculateFOVAmount();
+        }
+
+        HandlePlayerFollow();
 
     } // Update()
 
+    void HandlePlayerFollow()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y, playerTransform.position.z + offsetToPlayer.z);
+
+    } // HandlePlayerFollow()
+
+    public void GetCollectedCubeCount() // calling from gamemanager( every cube interactions )
+    {
+        currentCollectedCubeCount = playerCubeScript.cubeStackParentTransform.childCount;
+        targetFOVamount = defFOVAmount + (currentCollectedCubeCount * (cubeCountFOVMultiplier));
+
+    } // GetCollectedCubeCount()
+
+    void CalculateFOVAmount()
+    {
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOVamount, fovSmoothDampValue);
+
+    } // CalculateFOVAmount()
 
 } // class

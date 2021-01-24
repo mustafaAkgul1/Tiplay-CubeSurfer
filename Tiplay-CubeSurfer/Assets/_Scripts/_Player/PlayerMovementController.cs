@@ -7,7 +7,7 @@ public class PlayerMovementController : MonoBehaviour
     public static PlayerMovementController _instance;
 
     [Header("General Variables")]
-    public bool canMove = true;
+    public bool canMove = false;
     public float moveSpeed;
     public float sensitivityMultiplier;
     public float deltaThreshold;
@@ -42,6 +42,12 @@ public class PlayerMovementController : MonoBehaviour
         }
 
     } // Update()
+
+    public void TriggerGameStarted()
+    {
+        canMove = true;
+
+    } // TriggerGameStarted()
 
     void AttachReferences()
     {
