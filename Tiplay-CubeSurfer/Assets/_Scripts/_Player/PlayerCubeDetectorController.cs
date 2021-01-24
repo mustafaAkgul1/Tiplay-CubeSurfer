@@ -43,4 +43,15 @@ public class PlayerCubeDetectorController : MonoBehaviour
 
     } // OnTriggerEnter()
 
+    public void CheckHasCubeLeft()
+    {
+        if (cubeStackParentTransform.childCount <= 0)
+        {
+            // playerı taşıyan küp kalmadı, ölüm trigger
+            PlayerMovementController._instance.TriggerDeath();
+            GameManager._instance.TriggerLevelFailed();
+        } 
+
+    } // CheckHasCubeLeft()
+
 } //class

@@ -12,6 +12,7 @@ public class NormalCubeFrontCheck : MonoBehaviour
 
             PlayerMovementController._instance.TriggerCubeLostForSpeedDecrease();
             GameManager._instance.TriggerCamFOV();
+            EventManager.onCubeLostEvent.Invoke();
         }
 
     } // OnTriggerEnter()

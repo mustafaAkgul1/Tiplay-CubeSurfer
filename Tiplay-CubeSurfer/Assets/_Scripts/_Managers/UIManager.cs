@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     public GameObject popUpTextPrefab;
     public GameObject gemImage;
     public TextMeshProUGUI gemAmountText;
+    public Animator gemAreaAnimator;
 
     private void Awake()
     {
@@ -41,6 +42,8 @@ public class UIManager : MonoBehaviour
 
     public void IncreaseGemAmountText(int _amount)
     {
+        TriggerCoinReachedAnimation();
+
         int tmp = int.Parse(gemAmountText.text);
         tmp += _amount;
         gemAmountText.text = tmp.ToString();
@@ -48,6 +51,16 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.SetInt("GemAmount", tmp);
 
     } // IncreaseCoinText()
+
+    public void TriggerCoinReachedAnimation()
+    {
+        gemAreaAnimator.ResetTrigger("Triggered");
+        gemAreaAnimator.SetTrigger("Triggered");
+
+    } // TriggerCoinReachedAnimation()
+
+
+
 
     public void TryAgainButtonPressed()
     {

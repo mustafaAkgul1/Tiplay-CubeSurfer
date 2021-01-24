@@ -26,7 +26,9 @@ public class CollectableGem : MonoBehaviour
 
             GameObject tmp = Instantiate(gemImage, createPos, Quaternion.identity, uiCanvasObject);
 
-            tmp.transform.DOScale(tmp.transform.localScale * 1.2f, 0.15f).SetEase(Ease.InSine).OnComplete(() => tmp.transform.DOScale(tmp.transform.localScale / 4f, 0.35f).SetEase(Ease.OutSine));
+            tmp.transform.DOScale(tmp.transform.localScale * 1.2f, 0.15f).SetEase(Ease.InSine).OnComplete(() => 
+            tmp.transform.DOScale(tmp.transform.localScale / 4f, 0.35f).SetEase(Ease.OutSine));
+
             tmp.transform.DOMove(UIManager._instance.gemImage.transform.position, .5f).SetEase(movingGemEaseType).OnComplete(() =>
             {
                 UIManager._instance.IncreaseGemAmountText(gemAmount);

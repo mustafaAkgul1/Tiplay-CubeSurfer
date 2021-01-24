@@ -15,6 +15,7 @@ TagManager:
   - Floor
   - FinishPointForBar
   - CollectableGem
+  - PlayerModel
   layers:
   - Default
   - TransparentFX

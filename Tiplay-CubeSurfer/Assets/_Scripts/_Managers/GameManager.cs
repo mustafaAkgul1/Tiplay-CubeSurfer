@@ -78,6 +78,12 @@ public class GameManager : MonoBehaviour
 
     } // DecreaseCamFOV()
 
+    public void TriggerLevelFailed()
+    {
+        isGameFinished = true;
+        UIManager._instance.TriggerLevelFailed();
+
+    } // TriggerLevelFailed()
 
 
 

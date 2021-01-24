@@ -2,6 +2,6 @@
 
 public class EventManager
 {
-    public static UnityEvent testEvent;
+    public static UnityEvent onCubeLostEvent = new UnityEvent();
 
 } // class

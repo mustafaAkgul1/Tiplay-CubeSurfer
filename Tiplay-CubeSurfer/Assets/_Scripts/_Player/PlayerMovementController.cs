@@ -21,6 +21,7 @@ public class PlayerMovementController : MonoBehaviour
     public float maxXPos;
 
     [Header("References")]
+    public PlayerCubeDetectorController playerCubeDetectorScript;
     Rigidbody rbPlayer;
     Camera mainCam;
 
@@ -122,6 +123,8 @@ public class PlayerMovementController : MonoBehaviour
 
     public void TriggerCubeLostForSpeedDecrease()
     {
+        CheckHasCubesForDeath();
+
         if (DOTween.IsTweening("PlayerSpeedDecreaseTween"))
         {
             DOTween.Kill("PlayerSpeedDecreaseTween", true);
@@ -138,5 +141,18 @@ public class PlayerMovementController : MonoBehaviour
         });
 
     } // TriggerCubeLostForSpeedDecrease()
+
+    void CheckHasCubesForDeath()
+    {
+        playerCubeDetectorScript.CheckHasCubeLeft();
+
+    } // CheckHasCubesForDeath()
+
+    public void TriggerDeath()
+    {
+        canMove = false;
+        rbPlayer.velocity = Vector3.zero;
+
+    } // TriggerDeath()
 
 } // class
