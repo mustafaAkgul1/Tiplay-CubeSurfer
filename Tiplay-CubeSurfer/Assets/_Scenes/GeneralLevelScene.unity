@@ -3669,7 +3669,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 0
-  moveSpeed: 750
+  defMoveSpeed: 1000
+  decreasedMoveSpeed: 500
   sensitivityMultiplier: 0.01
   deltaThreshold: 0
   minXPos: -2

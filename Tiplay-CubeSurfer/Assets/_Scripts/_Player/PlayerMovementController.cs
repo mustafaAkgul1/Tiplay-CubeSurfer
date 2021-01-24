@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,9 @@ public class PlayerMovementController : MonoBehaviour
 
     [Header("General Variables")]
     public bool canMove = false;
-    public float moveSpeed;
+    public float defMoveSpeed;
+    public float decreasedMoveSpeed;
+    float currentMoveSpeed;
     public float sensitivityMultiplier;
     public float deltaThreshold;
     Vector2 firstTouchPosition;
@@ -58,6 +61,8 @@ public class PlayerMovementController : MonoBehaviour
 
     void ResetInputValues()
     {
+        currentMoveSpeed = defMoveSpeed;
+
         rbPlayer.velocity = Vector3.zero;
         firstTouchPosition = Vector2.zero;
         finalTouchX = 0f;
@@ -67,7 +72,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void HandleEndlessRun()
     {
-        rbPlayer.velocity = new Vector3(rbPlayer.velocity.x, rbPlayer.velocity.y, moveSpeed * Time.deltaTime);
+        rbPlayer.velocity = new Vector3(rbPlayer.velocity.x, rbPlayer.velocity.y, currentMoveSpeed * Time.deltaTime);
 
     } // HandleEndlessRun()
 
@@ -114,5 +119,24 @@ public class PlayerMovementController : MonoBehaviour
         canMove = false;
 
     } // TriggerLevelFinished()
+
+    public void TriggerCubeLostForSpeedDecrease()
+    {
+        if (DOTween.IsTweening("PlayerSpeedDecreaseTween"))
+        {
+            DOTween.Kill("PlayerSpeedDecreaseTween", true);
+        }
+
+        if (DOTween.IsTweening("PlayerSpeedIncreaseTween"))
+        {
+            DOTween.Kill("PlayerSpeedIncreaseTween", true);
+        }
+
+        DOTween.To(() => currentMoveSpeed, x => currentMoveSpeed = x, decreasedMoveSpeed, 0.1f).SetId("PlayerSpeedDecreaseTween").OnComplete(() => {
+
+            DOTween.To(() => currentMoveSpeed, x => currentMoveSpeed = x, defMoveSpeed, 0.1f).SetId("PlayerSpeedIncreaseTween");
+        });
+
+    } // TriggerCubeLostForSpeedDecrease()
 
 } // class

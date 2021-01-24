@@ -34,7 +34,7 @@ public class PlayerCubeDetectorController : MonoBehaviour
                 other.transform.parent.GetComponent<NormalCubeController>().TriggerCollected();
                 cubeDockTransform.position += Vector3.up * cubeDockYoffset;
 
-                GameManager._instance.IncreaseCamFOV();
+                GameManager._instance.TriggerCamFOV();
             }
         }
 

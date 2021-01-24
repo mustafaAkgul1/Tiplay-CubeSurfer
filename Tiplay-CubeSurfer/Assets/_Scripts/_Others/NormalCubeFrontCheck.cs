@@ -10,7 +10,8 @@ public class NormalCubeFrontCheck : MonoBehaviour
         {
             transform.parent.parent = null;
 
-            GameManager._instance.DecreaseCamFOV();
+            PlayerMovementController._instance.TriggerCubeLostForSpeedDecrease();
+            GameManager._instance.TriggerCamFOV();
         }
 
     } // OnTriggerEnter()

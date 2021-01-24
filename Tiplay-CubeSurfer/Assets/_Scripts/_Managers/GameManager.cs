@@ -61,38 +61,8 @@ public class GameManager : MonoBehaviour
 
     } // SetPlayerPrefSettings()
 
-    public void IncreaseCamFOV()
+    public void TriggerCamFOV()
     {
-        //if (DOTween.IsTweening("CamFOVIncreaseTween"))
-        //{
-        //    DOTween.Kill("CamFOVIncreaseTween");
-        //}
-
-        //if (DOTween.IsTweening("CamFOVDecreaseTween"))
-        //{
-        //    DOTween.Kill("CamFOVDecreaseTween", true);
-        //}
-
-        //mainCamera.DOFieldOfView(mainCamera.fieldOfView + camFovChangeAmount, camFovChangeTime).SetId("CamFOVIncreaseTween");
-
-        CameraController._instance.GetCollectedCubeCount();
-
-    } // IncreaseCamFOV()
-
-    public void DecreaseCamFOV()
-    {
-        //if (DOTween.IsTweening("CamFOVIncreaseTween"))
-        //{
-        //    DOTween.Kill("CamFOVIncreaseTween", true);
-        //}
-
-        //if (DOTween.IsTweening("CamFOVDecreaseTween"))
-        //{
-        //    DOTween.Kill("CamFOVDecreaseTween", true);
-        //}
-
-        //mainCamera.DOFieldOfView(mainCamera.fieldOfView - camFovChangeAmount, camFovChangeTime).SetId("CamFOVDecreaseTween");
-
         CameraController._instance.GetCollectedCubeCount();
 
     } // DecreaseCamFOV()
