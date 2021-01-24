@@ -1,25 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ProgressBarController : MonoBehaviour
 {
-    float FirstDistance, currentDistance;
-    [SerializeField] Image filledBar;
-    [SerializeField] Transform Finish,Player;
+    float firstDistance, currentDistance;
+    public Slider filledBar;
+    public Transform finishPoint;
+    public Transform playerPoint;
 
     private void Start()
     {
-        Finish = GameObject.FindGameObjectWithTag("FinishObjectForBar").transform;
-        FirstDistance = Mathf.Abs(Finish.position.z) - Mathf.Abs(Player.position.z);
+        finishPoint = GameObject.FindGameObjectWithTag("FinishPointForBar").transform;
+        firstDistance = Mathf.Abs(finishPoint.position.z) - Mathf.Abs(playerPoint.position.z);
 
     } // Start()
 
     void Update()
     {
-        currentDistance = Mathf.Abs(Finish.position.z) - Mathf.Abs(Player.position.z);
-        filledBar.fillAmount = (FirstDistance - currentDistance) / FirstDistance;
+        currentDistance = Mathf.Abs(finishPoint.position.z) - Mathf.Abs(playerPoint.position.z);
+        filledBar.value = (firstDistance - currentDistance) / firstDistance;
 
     } // Update()
 

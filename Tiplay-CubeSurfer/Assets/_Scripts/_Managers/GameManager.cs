@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using MoreMountains.NiceVibrations;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class GameManager : MonoBehaviour
 
     [Header("References")]
     public Camera mainCamera;
+
+    [Header("Vibration")]
+    public HapticTypes cubeCollectionHapticType;
 
     private void Awake()
     {
@@ -61,13 +65,18 @@ public class GameManager : MonoBehaviour
 
     } // SetPlayerPrefSettings()
 
-    public void TriggerCamFOV()
+    public void TriggerCubeCollect()
+    {
+        CameraController._instance.GetCollectedCubeCount();
+        MMVibrationManager.Haptic(cubeCollectionHapticType);
+
+    } // TriggerCubeCollect()
+
+    public void TriggerCamFOV() // called when cube lost
     {
         CameraController._instance.GetCollectedCubeCount();
 
     } // DecreaseCamFOV()
-
-
 
 
 

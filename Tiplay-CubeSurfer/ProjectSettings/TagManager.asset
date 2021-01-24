@@ -13,6 +13,8 @@ TagManager:
   - PlayerParent
   - CubeDetectorColl
   - Floor
+  - FinishPointForBar
+  - CollectableGem
   layers:
   - Default
   - TransparentFX
@@ -34,8 +36,8 @@ TagManager:
   - PlayerModel
   - PlayerParent
   - PlayerCubeDetector
-  - 
-  - 
+  - VFXs
+  - CollectableGems
   - 
   - 
   - 

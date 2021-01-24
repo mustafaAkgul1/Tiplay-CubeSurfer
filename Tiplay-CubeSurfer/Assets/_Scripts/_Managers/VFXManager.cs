@@ -11,25 +11,33 @@ public class VFXManager : MonoBehaviour
 
     [Header("VFX Prefabs")]
     public GameObject levelSuccessConfettiVFX;
-    public GameObject testVFX;
+    public GameObject cubeCollectedVFX;
+    public GameObject gemCollectedVFX;
 
     private void Awake()
     {
         _instance = this;
     }
 
-    public void SpawnTestVFX(Transform _posTransform)
+    public void SpawnCubeCollectedVFX(Transform _transform)
     {
-        Vector3 pos = new Vector3(_posTransform.position.x, _posTransform.position.y + 0f, _posTransform.position.z);
+        Vector3 pos = new Vector3(_transform.position.x, _transform.position.y, _transform.position.z - 0.5f);
 
-        Instantiate(testVFX, pos, Quaternion.Euler(-90f, 0f, 0f));
+        Instantiate(cubeCollectedVFX, pos, Quaternion.Euler(0f, 180f, 0f), _transform);
 
-    } // SpawnTestVFX()
+    } // SpawnCubeCollectedVFX()
 
-
-    public void StartConfettiLoop(Transform _posTransform)
+    public void SpawnGemCollectedVFX(Transform _transform)
     {
-        StartCoroutine(ConfettiLoop(_posTransform.position));
+        Vector3 pos = new Vector3(_transform.position.x, _transform.position.y + 1f, _transform.position.z);
+
+        Instantiate(gemCollectedVFX, pos, Quaternion.Euler(0f, 180f, 0f), _transform);
+
+    } // SpawnCubeCollectedVFX()
+
+    public void StartConfettiLoop(Transform _transform)
+    {
+        StartCoroutine(ConfettiLoop(_transform.position));
 
     } // SpawnLevelSuccessConfettiVFX()
 
