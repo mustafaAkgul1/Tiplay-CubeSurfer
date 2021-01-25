@@ -19,6 +19,7 @@ TagManager:
   - FinishFloor
   - FinishFloorUpTrigger
   - LatestStopperColl
+  - FinishFloorForTrail
   layers:
   - Default
   - TransparentFX

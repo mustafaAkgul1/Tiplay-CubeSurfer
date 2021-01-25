@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b547cf62e5b3b9242a2b34b7c7f073a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentMultiplierZone: 0
   finishFloorType: 0
 --- !u!65 &1118626584660243454
 BoxCollider:
@@ -74,7 +75,7 @@ GameObject:
   - component: {fileID: 1118626585552535024}
   m_Layer: 22
   m_Name: GFX
-  m_TagString: Untagged
+  m_TagString: FinishFloorForTrail
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

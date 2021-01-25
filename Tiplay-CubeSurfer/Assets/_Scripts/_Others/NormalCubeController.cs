@@ -33,7 +33,7 @@ public class NormalCubeController : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Floor"))
+        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("FinishFloorForTrail"))
         {
             if (cubeState == CubeStates.InParent)
             {
@@ -45,7 +45,7 @@ public class NormalCubeController : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Floor"))
+        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("FinishFloorForTrail"))
         {
             canTrail = false;
         }
