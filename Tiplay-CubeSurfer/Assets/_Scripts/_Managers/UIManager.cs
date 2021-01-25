@@ -16,8 +16,13 @@ public class UIManager : MonoBehaviour
     public GameObject nextLevelButton;
     public GameObject popUpTextPrefab;
     public GameObject gemImage;
+    public TextMeshProUGUI currentLevelText;
     public TextMeshProUGUI gemAmountText;
     public Animator gemAreaAnimator;
+    public GameObject levelEndCanvas;
+    public TextMeshProUGUI gemMultiplierText;
+    public TextMeshProUGUI collectedGemAmountText;
+    public TextMeshProUGUI collectedGemSumAmountText;
 
     private void Awake()
     {
@@ -26,12 +31,27 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        InitPrefValues();
+
+    } // Start()
+
+    void InitPrefValues()
+    {
         if (PlayerPrefs.HasKey("GemAmount"))
         {
             gemAmountText.text = PlayerPrefs.GetInt("GemAmount").ToString();
         }
 
-    } // Start()
+        if (PlayerPrefs.HasKey("CurrentLevel"))
+        {
+            currentLevelText.text = PlayerPrefs.GetInt("CurrentLevel").ToString();
+        }
+        else
+        {
+            currentLevelText.text = "0";
+        }
+
+    } // InitPrefValues()
 
     public void CreatePopUpText(Transform _transform)
     {
@@ -59,7 +79,14 @@ public class UIManager : MonoBehaviour
 
     } // TriggerCoinReachedAnimation()
 
+    public void TriggerLevelEndCanvas(int _collectedGemAmount, int _multiplier, int _collectedSumGemAmount)
+    {
+        levelEndCanvas.SetActive(true);
+        collectedGemAmountText.text = _collectedGemAmount.ToString();
+        collectedGemSumAmountText.text = _collectedSumGemAmount.ToString();
+        gemMultiplierText.text = "x" + _multiplier.ToString();
 
+    } // TriggerLevelEndCanvas()
 
 
     public void TryAgainButtonPressed()
@@ -79,12 +106,6 @@ public class UIManager : MonoBehaviour
         tryAgainButton.SetActive(true);
 
     } // TriggerLevelFailed()
-
-    public void TriggerLevelSuccesed()
-    {
-        nextLevelButton.SetActive(true);
-
-    } // TriggerLevelSuccesed()
 
 
 

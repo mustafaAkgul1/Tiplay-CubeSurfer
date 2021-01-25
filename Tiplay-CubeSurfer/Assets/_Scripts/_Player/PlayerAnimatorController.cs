@@ -2,11 +2,14 @@
 
 public class PlayerAnimatorController : MonoBehaviour
 {
+    [Header("References")]
     Animator anim;
+    public Transform rigTransform;
+    bool isDeathTriggered = false;
 
     private void OnEnable()
     {
-        EventManager.onCubeLostEvent.AddListener(TriggerJumped);
+        //EventManager.onCubeLostEvent.AddListener(TriggerJumped);
 
     } // OnEnable()
 
@@ -34,22 +37,63 @@ public class PlayerAnimatorController : MonoBehaviour
 
     } //  TriggerLanded()
 
-    private void OnCollisionEnter(Collision collision)
+    public void TriggerDance()
     {
-        if (collision.gameObject.CompareTag("NormalCube"))
+        anim.ResetTrigger("Dance");
+        anim.SetTrigger("Dance");
+
+    } // TriggerDance()
+
+    public void TriggerRagDollDeath()
+    {
+        if (!isDeathTriggered)
+        {
+            isDeathTriggered = true;
+
+            anim.enabled = false;
+
+            foreach (Rigidbody item in rigTransform.GetComponentsInChildren<Rigidbody>())
+            {
+                item.isKinematic = false;
+                item.useGravity = true;
+            }
+
+            foreach (Collider item in rigTransform.GetComponentsInChildren<Collider>())
+            {
+                item.tag = "Untagged";
+                item.isTrigger = false;
+            }
+        }
+
+    } // TriggerRagDollDeath()
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("NormalCube"))
         {
             TriggerLanded();
         }
 
-    } // OnCollisionEnter()
+    } // OnTriggerEnter()
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        if (collision.gameObject.CompareTag("NormalCube"))
+        if (other.CompareTag("NormalCube"))
+        {
+            TriggerLanded();
+        }
+
+    } // OnTriggerStay()
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("NormalCube"))
         {
             TriggerJumped();
         }
 
-    } // OnCollisionExit()
+    } // OnTriggerExit()
+
+
 
 } // class

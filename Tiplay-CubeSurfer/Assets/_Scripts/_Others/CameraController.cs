@@ -8,8 +8,10 @@ public class CameraController : MonoBehaviour
 
     [Header("General Variables")]
     public bool useFOVChange = true;
+    public bool useCameraRotateWhenFinish = true;
     public float cubeCountFOVMultiplier;
     public float fovSmoothDampValue;
+    public CameraStates cameraState;
     Vector3 offsetToPlayer;
     int currentCollectedCubeCount = 0;
     float targetFOVamount = 60f;
@@ -19,6 +21,12 @@ public class CameraController : MonoBehaviour
     public Transform playerTransform;
     public PlayerCubeDetectorController playerCubeScript;
     Camera cam;
+
+    public enum CameraStates
+    {
+        OnFollow,
+        OnSuccessFinish
+    }
 
     private void Awake()
     {
@@ -40,18 +48,35 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        if (useFOVChange)
+        switch (cameraState)
         {
-            CalculateFOVAmount();
-        }
+            case CameraStates.OnFollow:
 
-        HandlePlayerFollow();
+                if (useFOVChange)
+                {
+                    CalculateFOVAmount();
+                }
+
+                HandlePlayerFollow();
+
+                break;
+
+            case CameraStates.OnSuccessFinish:
+
+                break;
+
+            default:
+                break;
+        }
 
     } // Update()
 
     void HandlePlayerFollow()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y, playerTransform.position.z + offsetToPlayer.z);
+        if (playerTransform != null)
+        {
+            transform.position = new Vector3(transform.position.x, playerTransform.position.y + offsetToPlayer.y, playerTransform.position.z + offsetToPlayer.z);
+        }
 
     } // HandlePlayerFollow()
 
@@ -67,5 +92,16 @@ public class CameraController : MonoBehaviour
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOVamount, fovSmoothDampValue);
 
     } // CalculateFOVAmount()
+
+    public void TriggerLevelSuccessFinished(Transform _parent)
+    {
+        cameraState = CameraStates.OnSuccessFinish;
+
+        if (useCameraRotateWhenFinish)
+        {
+            transform.parent = _parent;
+        }
+
+    } // TriggerLevelSuccessFinished()
 
 } // class

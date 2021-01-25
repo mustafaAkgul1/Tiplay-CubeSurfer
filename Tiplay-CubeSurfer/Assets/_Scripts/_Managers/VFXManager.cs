@@ -47,7 +47,7 @@ public class VFXManager : MonoBehaviour
         {
             yield return new WaitForSeconds(confettiLoopRate);
 
-            Vector3 rndPos = new Vector3(Random.Range(_pos.x - 2f, _pos.x + 2f), _pos.y + 5f, Random.Range(_pos.z - 2f, _pos.z + 2f));
+            Vector3 rndPos = new Vector3(Random.Range(_pos.x - 2f, _pos.x + 2f), _pos.y + 10f, Random.Range(_pos.z - 2f, _pos.z + 2f));
             Instantiate(levelSuccessConfettiVFX, rndPos, Quaternion.Euler(-90f, 0f, 0f));
         }
 

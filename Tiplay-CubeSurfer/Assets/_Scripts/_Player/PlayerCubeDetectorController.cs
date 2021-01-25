@@ -48,10 +48,23 @@ public class PlayerCubeDetectorController : MonoBehaviour
         if (cubeStackParentTransform.childCount <= 0)
         {
             // playerı taşıyan küp kalmadı, ölüm trigger
-            PlayerMovementController._instance.TriggerDeath();
+            PlayerMovementController._instance.TriggerMovementStoppedWithDeath();
             GameManager._instance.TriggerLevelFailed();
         } 
 
     } // CheckHasCubeLeft()
+
+    public bool CheckHasOneCubeLeftForSuccessFinish()
+    {
+        bool tmp = false;
+
+        if (cubeStackParentTransform.childCount == 1)
+        {
+            tmp = true;
+        }
+
+        return tmp;
+
+    } // CheckHasOneCubeLeftForSuccessFinish()
 
 } //class

@@ -19,9 +19,12 @@ public class PlayerMovementController : MonoBehaviour
     Vector2 curTouchPosition;
     public float minXPos;
     public float maxXPos;
+    int currentMultiplierZone = 1;
 
     [Header("References")]
     public PlayerCubeDetectorController playerCubeDetectorScript;
+    public PlayerAnimatorController playerAnimScript;
+    public CameraRotaterParent cameraRotaterParent;
     Rigidbody rbPlayer;
     Camera mainCam;
 
@@ -148,11 +151,68 @@ public class PlayerMovementController : MonoBehaviour
 
     } // CheckHasCubesForDeath()
 
-    public void TriggerDeath()
+    public void TriggerMovementStopped()
     {
         canMove = false;
         rbPlayer.velocity = Vector3.zero;
 
-    } // TriggerDeath()
+    } // TriggerMovementStopped()
+
+    public void TriggerMovementStoppedWithDeath()
+    {
+        TriggerMovementStopped();
+        playerAnimScript.TriggerRagDollDeath();
+        CameraController._instance.cameraState = CameraController.CameraStates.OnSuccessFinish;
+
+    } // TriggerMovementStoppedWithDeath()
+
+    public void TriggerFinishFloorUpperPart()
+    {
+        if (playerCubeDetectorScript.CheckHasOneCubeLeftForSuccessFinish())
+        {
+            TriggerMovementStopped();
+            GameManager._instance.TriggerLevelSuccessed(currentMultiplierZone);
+            playerAnimScript.TriggerDance();
+            cameraRotaterParent.canRotate = true;
+            CameraController._instance.TriggerLevelSuccessFinished(cameraRotaterParent.transform);
+            VFXManager._instance.StartConfettiLoop(transform);
+        }
+        else
+        {
+            if (DOTween.IsTweening("PlayerFinishFloorUpperTween"))
+            {
+                DOTween.Kill("PlayerFinishFloorUpperTween");
+            }
+
+            rbPlayer.DOMoveY(rbPlayer.position.y + 1.125f, 0.12f).SetId("PlayerFinishFloorUpperTween");
+        }
+
+    } // TriggerFinishFloorUpperPart()
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Killzone"))
+        {
+            Destroy(gameObject);
+        }
+
+        if (other.CompareTag("FinishFloor"))
+        {
+            currentMultiplierZone = other.gameObject.GetComponent<FinishFloorController>().currentMultiplierZone;
+        }
+
+        if (other.CompareTag("LatestStopperColl"))
+        {
+            currentMultiplierZone = 10;
+
+            TriggerMovementStopped();
+            GameManager._instance.TriggerLevelSuccessed(currentMultiplierZone);
+            playerAnimScript.TriggerDance();
+            cameraRotaterParent.canRotate = true;
+            CameraController._instance.TriggerLevelSuccessFinished(cameraRotaterParent.transform);
+            VFXManager._instance.StartConfettiLoop(transform);
+        }
+
+    } // OnTriggerEnter()
 
 } // class

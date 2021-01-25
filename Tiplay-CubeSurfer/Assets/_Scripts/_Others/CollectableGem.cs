@@ -35,6 +35,8 @@ public class CollectableGem : MonoBehaviour
                 Destroy(tmp);
             });
 
+            GameManager._instance.IncreaseCollectedGemAmount();
+
             Destroy(gameObject);
         }
 

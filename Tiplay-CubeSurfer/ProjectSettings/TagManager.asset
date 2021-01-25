@@ -16,6 +16,9 @@ TagManager:
   - FinishPointForBar
   - CollectableGem
   - PlayerModel
+  - FinishFloor
+  - FinishFloorUpTrigger
+  - LatestStopperColl
   layers:
   - Default
   - TransparentFX
@@ -39,7 +42,7 @@ TagManager:
   - PlayerCubeDetector
   - VFXs
   - CollectableGems
-  - 
+  - FinishFloors
   - 
   - 
   - 

@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public bool isGameFinished = false;
     public float camFovChangeAmount;
     public float camFovChangeTime;
+    public int gemAmount = 0;
+    public int collectedGemAmount = 0;
 
     [Header("References")]
     public Camera mainCamera;
@@ -26,6 +28,12 @@ public class GameManager : MonoBehaviour
         _instance = this;
     }
 
+    private void Start()
+    {
+        InitPrefValues();
+
+    } // Start()
+
     void Update()
     {
         if (!isGameStarted && Input.GetMouseButtonDown(0))
@@ -34,9 +42,16 @@ public class GameManager : MonoBehaviour
             TriggerGameStarted();
         }
 
-        HandleWinning();
-
     } // Update()
+
+    void InitPrefValues()
+    {
+        if (PlayerPrefs.HasKey("GemAmount"))
+        {
+            gemAmount = PlayerPrefs.GetInt("GemAmount");
+        }
+
+    } // InitPrefValues()
 
     void TriggerGameStarted()
     {
@@ -45,23 +60,13 @@ public class GameManager : MonoBehaviour
 
     } // TriggerGameStarted()
 
-    void HandleWinning()
-    {
-        if (!isGameFinished && true) // win condition
-        {
-            isGameFinished = true;
-            Debug.Log("Level Succesed");
-
-            SetPlayerPrefSettings();
-        }
-
-    } // HandleWinning()
-
     void SetPlayerPrefSettings()
     {
         int tmpCurr = PlayerPrefs.GetInt("CurrentLevel");
         tmpCurr++;
         PlayerPrefs.SetInt("CurrentLevel", tmpCurr);
+
+        PlayerPrefs.SetInt("GemAmount", gemAmount);
 
     } // SetPlayerPrefSettings()
 
@@ -85,6 +90,28 @@ public class GameManager : MonoBehaviour
 
     } // TriggerLevelFailed()
 
+    public void TriggerLevelSuccessed(int _multiplier)
+    {
+        isGameFinished = true;
+        TriggerLevelEndGemCalculation(_multiplier);
+        SetPlayerPrefSettings();
+
+    } // TriggerLevelSuccessed()
+
+    public void IncreaseCollectedGemAmount()
+    {
+        collectedGemAmount++;
+
+    } // IncreaseCollectedGemAmount()
+
+    public void TriggerLevelEndGemCalculation(int _multiplier)
+    {
+        int gemSum = collectedGemAmount * _multiplier;
+        gemAmount += gemSum;
+        UIManager._instance.IncreaseGemAmountText(gemSum);
+        UIManager._instance.TriggerLevelEndCanvas(collectedGemAmount, _multiplier, gemSum);
+
+    } // TriggerLevelEndGemCalculation()
 
 
     //Button pressing methods
