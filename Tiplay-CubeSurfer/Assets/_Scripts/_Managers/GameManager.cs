@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Vibration")]
     public HapticTypes cubeCollectionHapticType;
+    public HapticTypes gemCollectionHapticType;
 
     private void Awake()
     {
@@ -76,6 +77,12 @@ public class GameManager : MonoBehaviour
         MMVibrationManager.Haptic(cubeCollectionHapticType);
 
     } // TriggerCubeCollect()
+
+    public void TriggerGemCollectedHaptic()
+    {
+        MMVibrationManager.Haptic(gemCollectionHapticType);
+
+    } // TriggerGemCollectedHaptic()
 
     public void TriggerCamFOV() // called when cube lost
     {
