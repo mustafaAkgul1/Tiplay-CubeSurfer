@@ -172,6 +172,7 @@ public class PlayerMovementController : MonoBehaviour
         TriggerMovementStopped();
         playerAnimScript.TriggerRagDollDeath();
         CameraController._instance.cameraState = CameraController.CameraStates.OnSuccessFinish;
+        AudioManager._instance.MuteSFX(false);
 
     } // TriggerMovementStoppedWithDeath()
 
@@ -202,6 +203,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (other.CompareTag("Killzone"))
         {
+            AudioManager._instance.MuteSFX(false);
             Destroy(gameObject);
         }
 
@@ -220,6 +222,8 @@ public class PlayerMovementController : MonoBehaviour
             cameraRotaterParent.canRotate = true;
             CameraController._instance.TriggerLevelSuccessFinished(cameraRotaterParent.transform);
             VFXManager._instance.StartConfettiLoop(transform);
+
+            AudioManager._instance.MuteSFX(false);
         }
 
         if (other.CompareTag("MagnetCollectable"))

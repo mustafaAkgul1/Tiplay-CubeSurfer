@@ -27,6 +27,11 @@ public class NormalCubeController : MonoBehaviour
 
     public void TriggerCollected()
     {
+        if (cubeState == CubeStates.OnHold)
+        {
+            AudioManager._instance.PlayCubeCollectSFX();
+        }
+
         cubeState = CubeStates.InParent;
         Destroy(backCheckCollObject);
 
@@ -37,7 +42,6 @@ public class NormalCubeController : MonoBehaviour
 
         transform.localScale = defScale;
         Destroy(GetComponent<CollectableVacuumModule>());
-
 
     } // TriggerCollected()
 

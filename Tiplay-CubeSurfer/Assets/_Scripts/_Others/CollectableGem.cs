@@ -42,6 +42,8 @@ public class CollectableGem : MonoBehaviour
                 DOTween.Kill("CollectibleGemScaleTween");
             }
 
+            AudioManager._instance.PlayGemCollectSFX();
+
             Destroy(gameObject);
         }
 

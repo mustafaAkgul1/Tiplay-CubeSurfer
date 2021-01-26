@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public float camFovChangeTime;
     public int gemAmount = 0;
     public int collectedGemAmount = 0;
+    public bool isVibrationOn = true;
 
     [Header("References")]
     public Camera mainCamera;
@@ -54,6 +55,20 @@ public class GameManager : MonoBehaviour
             gemAmount = PlayerPrefs.GetInt("GemAmount");
         }
 
+        if (PlayerPrefs.HasKey("VibrationOff"))
+        {
+            int tmp = PlayerPrefs.GetInt("VibrationOff");
+
+            if (tmp == 0)
+            {
+                isVibrationOn = true;
+            }
+            else
+            {
+                isVibrationOn = false;
+            }
+        }
+
     } // InitPrefValues()
 
     void TriggerGameStarted()
@@ -76,13 +91,20 @@ public class GameManager : MonoBehaviour
     public void TriggerCubeCollect()
     {
         CameraController._instance.GetCollectedCubeCount();
-        MMVibrationManager.Haptic(cubeCollectionHapticType);
+
+        if (isVibrationOn)
+        {
+            MMVibrationManager.Haptic(cubeCollectionHapticType);
+        }
 
     } // TriggerCubeCollect()
 
     public void TriggerGemCollectedHaptic()
     {
-        MMVibrationManager.Haptic(gemCollectionHapticType);
+        if (isVibrationOn)
+        {
+            MMVibrationManager.Haptic(gemCollectionHapticType);
+        }
 
     } // TriggerGemCollectedHaptic()
 
@@ -110,6 +132,7 @@ public class GameManager : MonoBehaviour
     public void IncreaseCollectedGemAmount()
     {
         collectedGemAmount++;
+        TriggerGemCollectedHaptic();
 
     } // IncreaseCollectedGemAmount()
 
@@ -119,6 +142,7 @@ public class GameManager : MonoBehaviour
         gemAmount += gemSum;
         UIManager._instance.IncreaseGemAmountText(gemSum);
         UIManager._instance.TriggerLevelEndCanvas(collectedGemAmount, _multiplier, gemSum);
+        TriggerGemCollectedHaptic();
 
     } // TriggerLevelEndGemCalculation()
 

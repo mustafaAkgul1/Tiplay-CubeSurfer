@@ -315,8 +315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a0fbe19754bef4288f576edf8555a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scalingTime: 0.6
-  moveSpeed: 50
+  scalingTime: 0.4
+  moveSpeed: 15
   collectableType: 1
 --- !u!1 &6258794286628261372
 GameObject:

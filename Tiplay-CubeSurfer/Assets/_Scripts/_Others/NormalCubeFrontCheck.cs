@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class NormalCubeFrontCheck : MonoBehaviour
 {
@@ -14,6 +12,8 @@ public class NormalCubeFrontCheck : MonoBehaviour
             GameManager._instance.TriggerCamFOV();
             //EventManager.onCubeLostEvent.Invoke();
 
+            AudioManager._instance.PlayCubeLoseSFX();
+
             Destroy(transform.parent.gameObject, 2f);
         }
 
@@ -23,6 +23,8 @@ public class NormalCubeFrontCheck : MonoBehaviour
             transform.parent.parent = null;
             GameManager._instance.TriggerCamFOV();
             //EventManager.onCubeLostEvent.Invoke();
+
+            AudioManager._instance.PlayCubeLoseSFX();
 
             Destroy(transform.parent.gameObject, 2f);
         }
