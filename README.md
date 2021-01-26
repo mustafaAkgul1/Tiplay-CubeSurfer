@@ -2,7 +2,7 @@
 
 Tiplay Studio Çırak Programına dahil olmak için, gönderilen case üzerine geliştirdiğim ikinci proje.
 Tiplay'in isteği üzerine "Cube Surfer" isimli yayınlanmış oyun referans alınmıştır.
-İlk proje olan "Tornado Smash" projesi ile birlikte toplam 7 gün içinde geliştirilmiştir.
+İlk proje olan "Tornado Smash" projesi ile birlikte toplam 6 gün içinde geliştirilmiştir.
 
 [Referans oyun linki.](https://play.google.com/store/apps/details?id=com.Atinon.PassOver&hl=tr&gl=US "Cube Surfer Google Play Store Link")
 
