@@ -30,18 +30,18 @@ public class NormalCubeController : MonoBehaviour
         if (cubeState == CubeStates.OnHold)
         {
             AudioManager._instance.PlayCubeCollectSFX();
+
+            cubeState = CubeStates.InParent;
+            Destroy(backCheckCollObject);
+
+            if (DOTween.IsTweening("CollectibleNormalCubeScaleTween"))
+            {
+                DOTween.Kill("CollectibleNormalCubeScaleTween");
+            }
+
+            transform.localScale = defScale;
+            Destroy(GetComponent<CollectableVacuumModule>());
         }
-
-        cubeState = CubeStates.InParent;
-        Destroy(backCheckCollObject);
-
-        if (DOTween.IsTweening("CollectibleNormalCubeScaleTween"))
-        {
-            DOTween.Kill("CollectibleNormalCubeScaleTween");
-        }
-
-        transform.localScale = defScale;
-        Destroy(GetComponent<CollectableVacuumModule>());
 
     } // TriggerCollected()
 

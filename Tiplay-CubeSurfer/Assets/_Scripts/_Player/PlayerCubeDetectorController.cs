@@ -29,15 +29,18 @@ public class PlayerCubeDetectorController : MonoBehaviour
         {
             if (GameManager._instance.isGameStarted)
             {
-                other.transform.parent.position = cubeDockTransform.position;
-                other.transform.parent.parent = cubeStackParentTransform;
-                other.transform.parent.GetComponent<NormalCubeController>().TriggerCollected();
-                cubeDockTransform.position += Vector3.up * cubeDockYoffset;
+                if (other.transform.parent.GetComponent<NormalCubeController>().cubeState == NormalCubeController.CubeStates.OnHold)
+                {
+                    other.transform.parent.position = cubeDockTransform.position;
+                    other.transform.parent.parent = cubeStackParentTransform;
+                    other.transform.parent.GetComponent<NormalCubeController>().TriggerCollected();
+                    cubeDockTransform.position += Vector3.up * cubeDockYoffset;
 
-                //GameManager._instance.TriggerCamFOV();
-                GameManager._instance.TriggerCubeCollect();
-                UIManager._instance.CreatePopUpText(other.transform.parent);
-                VFXManager._instance.SpawnCubeCollectedVFX(other.transform.parent);
+                    //GameManager._instance.TriggerCamFOV();
+                    GameManager._instance.TriggerCubeCollect();
+                    UIManager._instance.CreatePopUpText(other.transform.parent);
+                    VFXManager._instance.SpawnCubeCollectedVFX(other.transform.parent);
+                }
             }
         }
 

@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
         if (isVibrationOn)
         {
             MMVibrationManager.Haptic(cubeCollectionHapticType);
+            Debug.Log("vibratedCube");
         }
 
     } // TriggerCubeCollect()
@@ -104,6 +105,7 @@ public class GameManager : MonoBehaviour
         if (isVibrationOn)
         {
             MMVibrationManager.Haptic(gemCollectionHapticType);
+            Debug.Log("vibratedGem");
         }
 
     } // TriggerGemCollectedHaptic()
