@@ -13,8 +13,5 @@ MonoBehaviour:
   m_Name: LevelHolderAsset
   m_EditorClassIdentifier: 
   mapPrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7700032613078420474, guid: 791e1bf1e9ad2be40a4c8ebec94aee4b, type: 3}
+  - {fileID: 7700032613078420474, guid: 1407f1b6a0a61394083613bad8a262b1, type: 3}

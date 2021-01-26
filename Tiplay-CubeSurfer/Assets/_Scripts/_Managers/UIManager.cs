@@ -56,7 +56,7 @@ public class UIManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("CurrentLevel"))
         {
-            currentLevelText.text = PlayerPrefs.GetInt("CurrentLevel").ToString();
+            currentLevelText.text = (PlayerPrefs.GetInt("CurrentLevel") + 1).ToString();
         }
         else
         {
