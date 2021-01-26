@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI gemMultiplierText;
     public TextMeshProUGUI collectedGemAmountText;
     public TextMeshProUGUI collectedGemSumAmountText;
+    public GameObject tutorialSliderBarObject;
 
     private void Awake()
     {
@@ -87,6 +88,12 @@ public class UIManager : MonoBehaviour
         gemMultiplierText.text = "x" + _multiplier.ToString();
 
     } // TriggerLevelEndCanvas()
+
+    public void TriggerCloseTutorialBar()
+    {
+        Destroy(tutorialSliderBarObject);
+
+    } // TriggerCloseTutorialBar()
 
 
     public void TryAgainButtonPressed()

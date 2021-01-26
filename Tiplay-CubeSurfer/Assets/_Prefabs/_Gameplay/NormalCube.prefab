@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 2010604474293260067}
   - component: {fileID: 6258794285925979096}
   - component: {fileID: 5867187581782817742}
+  - component: {fileID: 4541867963029560112}
   m_Layer: 16
   m_Name: NormalCube
   m_TagString: NormalCube
@@ -302,6 +303,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 1
+--- !u!114 &4541867963029560112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6258794285925979100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a0fbe19754bef4288f576edf8555a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scalingTime: 0.6
+  moveSpeed: 50
+  collectableType: 1
 --- !u!1 &6258794286628261372
 GameObject:
   m_ObjectHideFlags: 0

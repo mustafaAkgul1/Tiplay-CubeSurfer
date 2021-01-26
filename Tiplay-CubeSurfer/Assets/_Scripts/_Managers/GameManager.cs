@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
 
     void InitPrefValues()
     {
+        DOTween.Clear(true);
+
         if (PlayerPrefs.HasKey("GemAmount"))
         {
             gemAmount = PlayerPrefs.GetInt("GemAmount");
@@ -56,8 +58,8 @@ public class GameManager : MonoBehaviour
 
     void TriggerGameStarted()
     {
-        //ui tutorial kapat
         PlayerMovementController._instance.TriggerGameStarted();
+        UIManager._instance.TriggerCloseTutorialBar();
 
     } // TriggerGameStarted()
 

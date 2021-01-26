@@ -25,6 +25,7 @@ public class PlayerMovementController : MonoBehaviour
     public PlayerCubeDetectorController playerCubeDetectorScript;
     public PlayerAnimatorController playerAnimScript;
     public CameraRotaterParent cameraRotaterParent;
+    public PlayerVacuumController playerVacuumScript;
     Rigidbody rbPlayer;
     Camera mainCam;
 
@@ -44,11 +45,20 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (canMove)
         {
-            HandleEndlessRun();
+            //HandleEndlessRun();
             HandleMovementWithSlide();
         }
 
     } // Update()
+
+    private void FixedUpdate()
+    {
+        if (canMove)
+        {
+            HandleEndlessRun();
+        }
+
+    } // FixedUpdate()
 
     public void TriggerGameStarted()
     {
@@ -60,14 +70,13 @@ public class PlayerMovementController : MonoBehaviour
     {
         rbPlayer = GetComponent<Rigidbody>();
         mainCam = Camera.main;
+        currentMoveSpeed = defMoveSpeed;
 
     } // AttachReferences()
 
     void ResetInputValues()
     {
-        currentMoveSpeed = defMoveSpeed;
-
-        rbPlayer.velocity = Vector3.zero;
+        rbPlayer.velocity = new Vector3(0f, rbPlayer.velocity.y, rbPlayer.velocity.z);
         firstTouchPosition = Vector2.zero;
         finalTouchX = 0f;
         curTouchPosition = Vector2.zero;
@@ -76,7 +85,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void HandleEndlessRun()
     {
-        rbPlayer.velocity = new Vector3(rbPlayer.velocity.x, rbPlayer.velocity.y, currentMoveSpeed * Time.deltaTime);
+        rbPlayer.velocity = new Vector3(rbPlayer.velocity.x, rbPlayer.velocity.y, currentMoveSpeed * Time.fixedDeltaTime);
 
     } // HandleEndlessRun()
 
@@ -184,7 +193,7 @@ public class PlayerMovementController : MonoBehaviour
                 DOTween.Kill("PlayerFinishFloorUpperTween");
             }
 
-            rbPlayer.DOMoveY(rbPlayer.position.y + 1.125f, 0.12f).SetId("PlayerFinishFloorUpperTween");
+            rbPlayer.DOMoveY(rbPlayer.position.y + 1.15f, 0.1f).SetId("PlayerFinishFloorUpperTween");
         }
 
     } // TriggerFinishFloorUpperPart()
@@ -211,6 +220,12 @@ public class PlayerMovementController : MonoBehaviour
             cameraRotaterParent.canRotate = true;
             CameraController._instance.TriggerLevelSuccessFinished(cameraRotaterParent.transform);
             VFXManager._instance.StartConfettiLoop(transform);
+        }
+
+        if (other.CompareTag("MagnetCollectable"))
+        {
+            Destroy(other.gameObject);
+            playerVacuumScript.TriggerMagnetActive();
         }
 
     } // OnTriggerEnter()

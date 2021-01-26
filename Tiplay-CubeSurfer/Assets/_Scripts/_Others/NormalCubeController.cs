@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class NormalCubeController : MonoBehaviour
     [Header("General Variables")]
     bool canTrail = false;
     public CubeStates cubeState;
+    Vector3 defScale;
 
     [Header("References")]
     public GameObject backCheckCollObject;
@@ -18,10 +20,24 @@ public class NormalCubeController : MonoBehaviour
         InParent
     }
 
+    private void Start()
+    {
+        defScale = transform.localScale;
+    }
+
     public void TriggerCollected()
     {
         cubeState = CubeStates.InParent;
         Destroy(backCheckCollObject);
+
+        if (DOTween.IsTweening("CollectibleNormalCubeScaleTween"))
+        {
+            DOTween.Kill("CollectibleNormalCubeScaleTween");
+        }
+
+        transform.localScale = defScale;
+        Destroy(GetComponent<CollectableVacuumModule>());
+
 
     } // TriggerCollected()
 

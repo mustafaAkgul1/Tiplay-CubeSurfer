@@ -57,7 +57,7 @@ public class CameraController : MonoBehaviour
                     CalculateFOVAmount();
                 }
 
-                HandlePlayerFollow();
+                //HandlePlayerFollow();
 
                 break;
 
@@ -70,6 +70,15 @@ public class CameraController : MonoBehaviour
         }
 
     } // Update()
+
+    private void FixedUpdate()
+    {
+        if (cameraState == CameraStates.OnFollow)
+        {
+            HandlePlayerFollow();
+        }
+
+    } // FixedUpdate()
 
     void HandlePlayerFollow()
     {

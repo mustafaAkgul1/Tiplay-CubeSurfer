@@ -37,6 +37,11 @@ public class CollectableGem : MonoBehaviour
 
             GameManager._instance.IncreaseCollectedGemAmount();
 
+            if (DOTween.IsTweening("CollectibleGemScaleTween"))
+            {
+                DOTween.Kill("CollectibleGemScaleTween");
+            }
+
             Destroy(gameObject);
         }
 

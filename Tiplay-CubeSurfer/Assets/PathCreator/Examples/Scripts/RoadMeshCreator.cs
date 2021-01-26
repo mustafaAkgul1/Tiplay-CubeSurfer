@@ -6,7 +6,7 @@ namespace PathCreation.Examples {
     public class RoadMeshCreator : PathSceneTool {
         [Header ("Road settings")]
         public float roadWidth = .4f;
-        [Range (0, .5f)]
+        [Range (0, 2f)]
         public float thickness = .15f;
         public bool flattenSurface;
 
