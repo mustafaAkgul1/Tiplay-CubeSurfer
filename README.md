@@ -10,4 +10,4 @@ Projenin güncel durumu :
 
 <img src="https://github.com/mustafaAkgul1/Tiplay-CubeSurfer/blob/main/Tiplay-CubeSurfer/Assets/Tiplay-CubeSurfer-GameplayGif.gif" width="250" height="450">
 
-[Mevcut Oynanabilir Apk Linki](https://drive.google.com/file/d/1bGYlZT5aTJ69AvBolZPBpjjrSc6cJPU_/view?usp=sharing "Proje Apk Link")
+[Mevcut Oynanabilir Apk Link](https://drive.google.com/file/d/1bGYlZT5aTJ69AvBolZPBpjjrSc6cJPU_/view?usp=sharing "Proje Apk Link")
